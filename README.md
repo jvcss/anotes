@@ -50,10 +50,10 @@ void demonstrateVariablesAndConstants(){
 
 ```dart
 void demonstrateDataTypes() {
-    int age = 17;
+    int age = Random().nextInt(91) + 12; // Value is >= 12 and < 103.;
     double height = 1.75;
     String name = 'John Doe';
-    bool isStudent = true;
+    bool isStudent = Random().nextBool();
     List<String> fruits = ['apple', 'banana', 'orange'];
     Map<String, dynamic> person = {'name': 'Alice', 'age': 30, 'isEmployed': true};
 
@@ -64,19 +64,25 @@ void demonstrateDataTypes() {
         }
         return newString;
     }
-
+    
     if (age >= 18) {
-        var first = '$name is not a minor${isStudent ? ' and is a student.' : ' and is not a student.'}';
+        var first = '$name is not a minor${isStudent ? 
+          ' and is a student.' : ' and is not a student.'}';
         var second = 'His height is ${height.toStringAsFixed(2)}';
-        print('$first\n$second');
+        
+        List<dynamic> listing = [first, second];
+        print(buildManyInOneLine(listing));
     } else {
         var first = '$name is a minor${isStudent ? ' and is a student.' : ' and is not a student.'}';
         var second = 'His height is ${height.toStringAsFixed(2)}';
-        print('$first\n$second');
+        
+        print(buildManyInOneLine([first, second]));
     }
 
     for (var fruit in fruits) {
-        print('I like $fruit');
+        print('${person['name']} loves $fruit and have ${person['age']} ' +
+              'years old and ${person['isEmployed']? 
+              "have a job!": "don't have a job yet."}');
     }
 
     int i = 0;

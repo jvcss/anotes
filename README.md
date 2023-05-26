@@ -93,9 +93,27 @@ void demonstrateDataTypes() {
 }
 ```
 
-### Now let's learn
+### Now let's learn Control Flow
 
 ```dart
+void demonstrateControlFlow() {
+    var grade = ['A', 'B', 'C', 'D'];
+
+    switch (grade[Random().nextInt(grade.length)]) {
+        case 'A':
+            print('Excellent!');
+        break;
+        case 'B':
+            print('Good!');
+        break;
+        case 'C':
+            print('Fair!');
+        break;
+        default:
+            print('Need to improve!');
+  }
+}
+
 ```
 
 ### Now let's learn

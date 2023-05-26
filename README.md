@@ -101,7 +101,7 @@ void demonstrateControlFlow() {
   
   String got = grade[Random().nextInt(grade.length)];
 
-  switch (got) {      
+  switch (got) {
       case 'A':
         print('$got is Excellent!');
       break;
@@ -118,9 +118,18 @@ void demonstrateControlFlow() {
 
 ```
 
-### Now let's learn
+### Now let's learn Functions
 
 ```dart
+void demonstrateFunctions() {
+  int multiply(int a, int b) {
+    return a * b;
+  }
+
+  print('5 * 3 = ${multiply(5, 3)}');
+
+  greet('Bob', prefix: 'Hi', suffix: 'How are you?');
+}
 ```
 
 ### Now let's learn

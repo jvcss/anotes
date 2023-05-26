@@ -97,20 +97,22 @@ void demonstrateDataTypes() {
 
 ```dart
 void demonstrateControlFlow() {
-    var grade = ['A', 'B', 'C', 'D'];
+  var grade = ['A', 'B', 'C', 'D'];
+  
+  String got = grade[Random().nextInt(grade.length)];
 
-    switch (grade[Random().nextInt(grade.length)]) {
-        case 'A':
-            print('Excellent!');
-        break;
-        case 'B':
-            print('Good!');
-        break;
-        case 'C':
-            print('Fair!');
-        break;
-        default:
-            print('Need to improve!');
+  switch (got) {      
+      case 'A':
+        print('$got is Excellent!');
+      break;
+      case 'B':
+        print('$got is Good!');
+      break;
+      case 'C':
+        print('$got is Fair!');
+      break;
+      default:
+        print('$got Need to improve!');
   }
 }
 

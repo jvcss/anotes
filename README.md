@@ -1,6 +1,6 @@
 # anotes
 
-<p style={font-style:italic}> A Flutter app to test endpoints.</p>
+<p > A Flutter app to test endpoints.</p>
 
 ---
 ## Getting Started

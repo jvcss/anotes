@@ -45,3 +45,79 @@ void demonstrateVariablesAndConstants(){
     print('This is a template using an immutable variable: $constantVariable\n');
 }
 ```
+
+### Now let's learn Data types
+
+```dart
+void demonstrateDataTypes() {
+    int age = 17;
+    double height = 1.75;
+    String name = 'John Doe';
+    bool isStudent = true;
+    List<String> fruits = ['apple', 'banana', 'orange'];
+    Map<String, dynamic> person = {'name': 'Alice', 'age': 30, 'isEmployed': true};
+
+    String buildManyInOneLine(List<dynamic> list){
+        String newString = '';
+        for (int count = 0; count < list.length; count++){
+            newString += "${list[count]}";
+        }
+        return newString;
+    }
+
+    if (age >= 18) {
+        var first = '$name is not a minor${isStudent ? ' and is a student.' : ' and is not a student.'}';
+        var second = 'His height is ${height.toStringAsFixed(2)}';
+        print('$first\n$second');
+    } else {
+        var first = '$name is a minor${isStudent ? ' and is a student.' : ' and is not a student.'}';
+        var second = 'His height is ${height.toStringAsFixed(2)}';
+        print('$first\n$second');
+    }
+
+    for (var fruit in fruits) {
+        print('I like $fruit');
+    }
+
+    int i = 0;
+    while (i < fruits.length) {
+        print(fruits[i]);
+        i++;
+    }
+}
+```
+
+### Now let's learn
+
+```dart
+```
+
+### Now let's learn
+
+```dart
+```
+
+### Now let's learn
+
+```dart
+```
+
+### Now let's learn
+
+```dart
+```
+
+### Now let's learn
+
+```dart
+```
+
+### Now let's learn
+
+```dart
+```
+
+### Now let's learn
+
+```dart
+```

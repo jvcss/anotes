@@ -19,10 +19,10 @@ class ShowDataTopics extends StatelessWidget {
         child: DataTable(
           columns: const [
             DataColumn(label: Text('ID')),
-            DataColumn(label: Text('Title')),
-            DataColumn(label: Text('Description')),
-            DataColumn(label: Text('Responsible')),
-            DataColumn(label: Text('Assignments')),
+            DataColumn(label: Text('Ramo')),
+            DataColumn(label: Text('Descrição')),
+            DataColumn(label: Text('Atividades')),
+            DataColumn(label: Text('Responsáveis')),
           ],
           rows: topics.map((topic) {
             return DataRow(

@@ -38,28 +38,28 @@ class AddDataFormState extends State<AddDataForm> {
             TextFormField(
               controller: _titleController,
               decoration: const InputDecoration(
-                labelText: 'title',
+                labelText: 'Ramo',
               ),
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _descriptionController,
               decoration: const InputDecoration(
-                labelText: 'description',
+                labelText: 'Descrição',
               ),
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _responsibleController,
               decoration: const InputDecoration(
-                labelText: 'responsible',
+                labelText: 'Atividades',
               ),
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _assignmentsController,
               decoration: const InputDecoration(
-                labelText: 'assignments',
+                labelText: 'Responsáveis',
               ),
             ),
             const SizedBox(height: 16),
@@ -89,7 +89,7 @@ class AddDataFormState extends State<AddDataForm> {
                 _responsibleController.clear();
                 _assignmentsController.clear();
               },
-              child: const Text('Add'),
+              child: const Text('Incluir'),
             ),
           ],
         ),

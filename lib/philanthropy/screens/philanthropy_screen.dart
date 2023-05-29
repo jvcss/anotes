@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:anotes/philanthropy/widgets/sidebar.dart';
 
-import '../widgets/collapsible_card.dart';
+import '../widgets/add_data_form.dart';
 
 class PhilanthropyScreen extends StatelessWidget {
   const PhilanthropyScreen({super.key});
@@ -15,14 +15,8 @@ class PhilanthropyScreen extends StatelessWidget {
       drawer: const Sidebar(),
       body: Center(
           child: ListView(
-        children: [
-          CollapsibleCard(
-            title: 'Card Title',
-            content: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: const Text('Card Content'),
-            ),
-          ),
+        children: const [
+          AddDataForm(), // Add the AddDataForm widget here
         ],
       )),
     );

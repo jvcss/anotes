@@ -15,7 +15,7 @@ class Sidebar extends StatelessWidget {
     return FutureBuilder<List<Topic>>(
       future: _fetchTopicsFromDatabase(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           final topics = snapshot.data;
 
           return Drawer(
@@ -39,6 +39,7 @@ class Sidebar extends StatelessWidget {
         return Drawer(
           child: ListView(padding: EdgeInsets.zero, children: [
             _buildHeader(context),
+            //_buildHeaderMobile(context),
           ]),
         );
       },
@@ -63,6 +64,41 @@ class Sidebar extends StatelessWidget {
     );
   }
 
+  /* Widget _buildHeaderMobile(BuildContext context) {
+    return const SizedBox(
+      height: 128,
+      child: DrawerHeader(
+        decoration: BoxDecoration(
+          color: Colors.blue,
+        ),
+        margin: EdgeInsets.only(bottom: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'ACEPROF',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 24,
+              child: Text(
+                'Educação e Trabalho',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  */
   Widget _buildHeader(BuildContext context) {
     return MouseRegion(
         cursor: SystemMouseCursors.click, // Set the cursor to a hand cursor
@@ -80,6 +116,7 @@ class Sidebar extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
+                margin: EdgeInsets.only(bottom: 8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -91,12 +128,14 @@ class Sidebar extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Educação e Trabalho',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
+                    SizedBox(
+                      height: 24,
+                      child: Text(
+                        'Educação e Trabalho',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],

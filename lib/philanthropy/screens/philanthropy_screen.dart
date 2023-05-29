@@ -16,7 +16,7 @@ class PhilanthropyScreen extends StatelessWidget {
       body: Center(
           child: ListView(
         children: const [
-          AddDataForm(), // Add the AddDataForm widget here
+          AddDataForm(), // Add the AddDataForm widget
         ],
       )),
     );

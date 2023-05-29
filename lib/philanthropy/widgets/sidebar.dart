@@ -12,7 +12,7 @@ class Sidebar extends StatelessWidget {
   @override
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Topic>>(
+    return FutureBuilder<List<TopicModel>>(
       future: _fetchTopicsFromDatabase(),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
@@ -46,15 +46,16 @@ class Sidebar extends StatelessWidget {
     );
   }
 
-  Future<List<Topic>> _fetchTopicsFromDatabase() async {
-    final database = await DatabaseProvider.instance.open();
-    final List<Map<String, dynamic>> topicMaps = await database.query('topics');
-    await DatabaseProvider.instance.close(database);
+  Future<List<TopicModel>> _fetchTopicsFromDatabase() async {
+    final database = await DatabaseProvider.database();
+    final List<Map<String, dynamic>> topicMaps =
+        await database.query(DatabaseProvider.topicTable);
+    await database.close();
 
-    return topicMaps.map((map) => Topic.fromMap(map)).toList();
+    return topicMaps.map((map) => TopicModel.fromMap(map)).toList();
   }
 
-  void _navigateToTopicScreen(BuildContext context, Topic topic) {
+  void _navigateToTopicScreen(BuildContext context, TopicModel topic) {
     Navigator.pop(context);
     Navigator.push(
       context,

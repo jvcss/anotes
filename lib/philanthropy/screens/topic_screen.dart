@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:anotes/philanthropy/models/topic_model.dart';
 
 class TopicScreen extends StatelessWidget {
-  final Topic topic;
+  final TopicModel topic;
 
   const TopicScreen({super.key, required this.topic});
 

@@ -7,9 +7,10 @@ import 'package:anotes/philanthropy/data/database.dart';
 import '../screens/philanthropy_screen.dart';
 
 class Sidebar extends StatelessWidget {
-  const Sidebar({super.key});
+  const Sidebar({
+    super.key,
+  });
 
-  @override
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<TopicModel>>(

@@ -1,6 +1,7 @@
 import 'package:anotes/philanthropy/models/topic_model.dart';
 import 'package:anotes/philanthropy/screens/philanthropy_screen.dart';
 import 'package:anotes/providers/authentication_provider.dart';
+import 'package:anotes/ui/authentication/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,13 +42,35 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Anotes API',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-        useMaterial3: true,
-      ),
-      home: const PhilanthropyScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Anotes API',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
+          useMaterial3: true,
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Colors.white, // Set the desired caret color
+            selectionHandleColor:
+                Colors.lightBlue, // Set the desired selection handle color
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            filled: true,
+            focusColor: Colors.white,
+            fillColor: Colors.transparent,
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white70),
+            ),
+            activeIndicatorBorder: BorderSide(color: Colors.white),
+            labelStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.white),
+          ),
+        ),
+        home: RegisterScreen() //PhilanthropyScreen(),
+        );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:anotes/philanthropy/models/topic_model.dart';
 import 'package:anotes/philanthropy/screens/philanthropy_screen.dart';
+import 'package:anotes/providers/authentication_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => TopicProvider()),
+        ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
       ],
       builder: (context, child) => const App(),
     ),

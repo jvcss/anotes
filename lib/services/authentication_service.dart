@@ -8,12 +8,21 @@
 /// functionality using the Firebase Authentication SDK.
 ///
 ///  It should provide methods for user registration,
-/// user login, user logout, and user authentication state changes.
+/// user
+/// ✅ login, user
+/// ✅ logout, user
+/// ✅ authentication state changes.
 ///
 ///  Use the methods provided by the Firebase Authentication SDK,
-/// such as createUserWithEmailAndPassword,
-///  signInWithEmailAndPassword, signOut, and authStateChanges,
-/// to implement these functionalities.
+/// such as
+/// ✅ createUserWithEmailAndPassword,
+/// ✅ signInWithEmailAndPassword,
+/// ✅ signOut,
+/// ✅ authStateChanges,
+///
+/// to implement these functionalities:
+/// ⬜ login with Google
+/// ⬜ login with Facebook
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {

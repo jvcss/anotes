@@ -3,6 +3,23 @@ import 'package:anotes/philanthropy/screens/philanthropy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/*
+Integrate the Authentication flow in the main app:
+
+In the main app, you can wrap the root widget with the necessary providers, 
+including the AuthenticationProvider.
+
+By doing this, the authentication state will be accessible throughout the app.
+
+You can listen to the authentication state changes using 
+a Consumer widget or by directly accessing the provider in the 
+widget tree to show different screens based on the user's authentication state.
+
+For example, if the user is authenticated, 
+you can navigate to the home screen. Otherwise, 
+you can navigate to the login/register screen.
+
+ */
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 

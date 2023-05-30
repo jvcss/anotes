@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import '../data/database.dart';
 
@@ -45,7 +43,7 @@ class TopicProvider extends ChangeNotifier {
   List<TopicModel> get topics => _topics;
 
   Future<void> selectTopics() async {
-    final dataList = await DatabaseProvider.selectTopic();
+    final dataList = await DatabaseProvider.instance.selectTopic();
     _topics = dataList
         .map((item) => TopicModel(
               id: item['id'],
@@ -55,18 +53,17 @@ class TopicProvider extends ChangeNotifier {
               assignments: item['assignments'],
             ))
         .toList();
-    print(_topics);
     notifyListeners();
   }
 
   Future<void> insertTopic(TopicModel topic) async {
-    await DatabaseProvider.insertTopic(topic.toMap());
+    await DatabaseProvider.instance.insertTopic(topic.toMap());
     _topics.add(topic);
     notifyListeners();
   }
 
   Future<void> updateTopic(TopicModel topic) async {
-    await DatabaseProvider.updateTopic(topic.id, topic.toMap());
+    await DatabaseProvider.instance.updateTopic(topic.id, topic.toMap());
     final index = _topics.indexWhere((t) => t.id == topic.id);
     if (index != -1) {
       _topics[index] = topic;
@@ -75,13 +72,13 @@ class TopicProvider extends ChangeNotifier {
   }
 
   Future<void> deleteTopic(int id) async {
-    await DatabaseProvider.deleteTopicById(id);
+    await DatabaseProvider.instance.deleteTopicById(id);
     _topics.removeWhere((t) => t.id == id);
     notifyListeners();
   }
 
   Future<void> loadTopics() async {
-    final dataList = await DatabaseProvider.selectAllTopics('id ASC');
+    final dataList = await DatabaseProvider.instance.selectAllTopics('id ASC');
     _topics.clear();
     _topics.addAll(dataList.map((map) => TopicModel.fromMap(map)));
     notifyListeners();

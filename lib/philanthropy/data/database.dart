@@ -2,15 +2,22 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseProvider {
+  static const String databaseName = 'philanthropy.db';
   static const String topicTable = 'topics';
+  static const int databaseVersion = 1;
 
-  static Future<Database> database() async {
-    final dbPath = await getDatabasesPath();
-    return await openDatabase(
-      join(dbPath, 'philanthropy.db'),
-      onCreate: (db, version) {
-        db.execute('''
-          CREATE TABLE IF NOT EXISTS $topicTable(
+  DatabaseProvider._();
+
+  static final DatabaseProvider instance = DatabaseProvider._();
+
+  Future<Database> open() async {
+    final databasePath = await getDatabasesPath();
+    final path = join(databasePath, databaseName);
+
+    return await openDatabase(path, version: databaseVersion,
+        onCreate: (db, databaseVersion) async {
+      await db.execute('''
+          CREATE TABLE IF NOT EXISTS topics(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             description TEXT,
@@ -18,23 +25,17 @@ class DatabaseProvider {
             assignments TEXT
           )
         ''');
-      },
-      version: 1,
-    );
+    });
   }
 
-  //insertTopic, selectAllTopics, deleteTopicById, deleteTable, selectTopicById, selectTopic
-
-  // Insert data
-  static Future<void> insertTopic(Map<String, Object> data) async {
-    final db = await DatabaseProvider.database();
+  Future<void> insertTopic(Map<String, Object> data) async {
+    final db = await DatabaseProvider.instance.open();
     await db.insert(topicTable, data,
-        conflictAlgorithm: ConflictAlgorithm.replace);
+        conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 
-  // Update topic by ID
-  static Future<void> updateTopic(int id, Map<String, Object> data) async {
-    final db = await DatabaseProvider.database();
+  Future<void> updateTopic(int id, Map<String, Object> data) async {
+    final db = await DatabaseProvider.instance.open();
     await db.update(
       topicTable,
       data,
@@ -43,34 +44,27 @@ class DatabaseProvider {
     );
   }
 
-  // Select all topics
-  static Future<List<Map<String, dynamic>>> selectAllTopics(
-      String orderBy) async {
-    final db = await DatabaseProvider.database();
-    return db.query(topicTable, orderBy: orderBy);
+  Future<List<Map<String, dynamic>>> selectTopic() async {
+    final db = await DatabaseProvider.instance.open();
+    return db.query(topicTable);
   }
 
-  // Select topic by ID
-  static Future<List<Map<String, dynamic>>> selectTopicById(int id) async {
-    final db = await DatabaseProvider.database();
-    return db.query(topicTable, where: 'id = ?', whereArgs: [id]);
-  }
-
-  // Delete topic by ID
-  static Future<void> deleteTopicById(int id) async {
-    final db = await DatabaseProvider.database();
+  Future<void> deleteTopicById(int id) async {
+    final db = await DatabaseProvider.instance.open();
     await db.delete(topicTable, where: 'id = ?', whereArgs: [id]);
   }
 
-  // Delete table
-  static Future<void> deleteTable(String table) async {
-    final db = await DatabaseProvider.database();
+  Future<void> deleteTable(String table) async {
+    final db = await DatabaseProvider.instance.open();
     await db.execute('DELETE FROM $table');
   }
 
-  // Select all topics
-  static Future<List<Map<String, dynamic>>> selectTopic() async {
-    final db = await DatabaseProvider.database();
-    return db.query(topicTable);
+  Future<List<Map<String, dynamic>>> selectAllTopics(String orderBy) async {
+    final db = await DatabaseProvider.instance.open();
+    return db.query(topicTable, orderBy: orderBy);
+  }
+
+  Future<void> close(Database database) async {
+    await database.close();
   }
 }

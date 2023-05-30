@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/topic_model.dart';
 import 'collapsible_card.dart';
+import 'dynamic_label_form_field.dart';
 
 class UpdateDataTopic extends StatefulWidget {
   const UpdateDataTopic({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class UpdateDataTopicState extends State<UpdateDataTopic> {
               setState(() {
                 _selectedTopic = selectedTopic;
                 _titleController.text = selectedTopic.title;
-                _descriptionController.text = selectedTopic.description;
+                //_descriptionController.text = selectedTopic.description;
                 _responsibleController.text = selectedTopic.responsible;
                 _assignmentsController.text = selectedTopic.assignments;
               });
@@ -61,12 +62,20 @@ class UpdateDataTopicState extends State<UpdateDataTopic> {
                   ),
                 ),
                 const SizedBox(height: 16),
+                DynamicLabelFormField(
+                  defaultLabelText: 'Description',
+                  selectedLabelText: _descriptionController.text != ''
+                      ? ''
+                      : _selectedTopic.description,
+                  controller: _descriptionController,
+                ),
+                /*
                 TextFormField(
                   controller: _descriptionController,
                   decoration: const InputDecoration(
                     labelText: 'Description',
                   ),
-                ),
+                ),*/
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _responsibleController,

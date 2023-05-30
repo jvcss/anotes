@@ -9,13 +9,16 @@ class CollapsibleCard extends StatefulWidget {
     required this.title,
     required this.content,
   });
+  static CollapsibleCardState? of(BuildContext context) {
+    return context.findAncestorStateOfType<CollapsibleCardState>();
+  }
 
   @override
   CollapsibleCardState createState() => CollapsibleCardState();
 }
 
 class CollapsibleCardState extends State<CollapsibleCard> {
-  bool _isExpanded = false;
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class CollapsibleCardState extends State<CollapsibleCard> {
       child: InkWell(
         onTap: () {
           setState(() {
-            _isExpanded = !_isExpanded;
+            isExpanded = !isExpanded;
           });
         },
         child: Column(
@@ -39,7 +42,7 @@ class CollapsibleCardState extends State<CollapsibleCard> {
                 ),
               ),
             ),
-            if (_isExpanded)
+            if (isExpanded)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: widget.content,

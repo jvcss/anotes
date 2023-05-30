@@ -20,19 +20,27 @@ class Sidebar extends StatelessWidget {
           final topics = snapshot.data;
 
           return Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: ListTile.divideTiles(
-                context: context,
-                tiles: topics!.map((topic) {
-                  return ListTile(
-                    title: Text(topic.title),
-                    onTap: () {
-                      _navigateToTopicScreen(context, topic);
-                    },
-                  );
-                }),
-              ).toList(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildHeader(context),
+                Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: ListTile.divideTiles(
+                      context: context,
+                      tiles: topics!.map((topic) {
+                        return ListTile(
+                          title: Text(topic.title),
+                          onTap: () {
+                            _navigateToTopicScreen(context, topic);
+                          },
+                        );
+                      }),
+                    ).toList(),
+                  ),
+                ),
+              ],
             ),
           );
         }
@@ -40,7 +48,6 @@ class Sidebar extends StatelessWidget {
         return Drawer(
           child: ListView(padding: EdgeInsets.zero, children: [
             _buildHeader(context),
-            //_buildHeaderMobile(context),
           ]),
         );
       },
@@ -48,7 +55,7 @@ class Sidebar extends StatelessWidget {
   }
 
   Future<List<TopicModel>> _fetchTopicsFromDatabase() async {
-    final database = await DatabaseProvider.database();
+    final database = await DatabaseProvider.instance.open();
     final List<Map<String, dynamic>> topicMaps =
         await database.query(DatabaseProvider.topicTable);
     await database.close();
@@ -66,44 +73,9 @@ class Sidebar extends StatelessWidget {
     );
   }
 
-  /* Widget _buildHeaderMobile(BuildContext context) {
-    return const SizedBox(
-      height: 128,
-      child: DrawerHeader(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-        ),
-        margin: EdgeInsets.only(bottom: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'ACEPROF',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 24,
-              child: Text(
-                'Educação e Trabalho',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-  */
   Widget _buildHeader(BuildContext context) {
     return MouseRegion(
-        cursor: SystemMouseCursors.click, // Set the cursor to a hand cursor
+        cursor: SystemMouseCursors.click,
         child: GestureDetector(
             onTap: () {
               Navigator.push(

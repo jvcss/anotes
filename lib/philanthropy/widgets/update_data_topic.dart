@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/topic_model.dart';
 import 'collapsible_card.dart';
-import 'dynamic_label_form_field.dart';
+//import 'dynamic_label_form_field.dart';
 
 class UpdateDataTopic extends StatefulWidget {
   const UpdateDataTopic({Key? key}) : super(key: key);
@@ -32,12 +32,9 @@ class UpdateDataTopicState extends State<UpdateDataTopic> {
   @override
   Widget build(BuildContext context) {
     final topicProvider = Provider.of<TopicProvider>(context);
-    //final topics = topicProvider.topics;
-    // ignore: no_leading_underscores_for_local_identifiers
-    //TopicModel? _selectedTopic;
 
     return CollapsibleCard(
-      title: 'Update Topic',
+      title: 'Atualizar Tópico',
       content: Column(
         children: [
           SelectDataTopic(
@@ -45,7 +42,7 @@ class UpdateDataTopicState extends State<UpdateDataTopic> {
               setState(() {
                 _selectedTopic = selectedTopic;
                 _titleController.text = selectedTopic.title;
-                //_descriptionController.text = selectedTopic.description;
+                _descriptionController.text = selectedTopic.description;
                 _responsibleController.text = selectedTopic.responsible;
                 _assignmentsController.text = selectedTopic.assignments;
               });
@@ -58,36 +55,35 @@ class UpdateDataTopicState extends State<UpdateDataTopic> {
                 TextFormField(
                   controller: _titleController,
                   decoration: const InputDecoration(
-                    labelText: 'Title',
+                    labelText: 'Título',
                   ),
                 ),
                 const SizedBox(height: 16),
-                DynamicLabelFormField(
+                /*DynamicLabelFormField(
                   defaultLabelText: 'Description',
                   selectedLabelText: _descriptionController.text != ''
-                      ? ''
-                      : _selectedTopic.description,
+                      ? _selectedTopic.description
+                      : _descriptionController.text,
                   controller: _descriptionController,
-                ),
-                /*
+                ),*/
                 TextFormField(
                   controller: _descriptionController,
                   decoration: const InputDecoration(
-                    labelText: 'Description',
+                    labelText: 'Descrição',
                   ),
-                ),*/
+                ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _responsibleController,
                   decoration: const InputDecoration(
-                    labelText: 'Responsible',
+                    labelText: 'Atividades',
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _assignmentsController,
                   decoration: const InputDecoration(
-                    labelText: 'Assignments',
+                    labelText: 'Responsáveis',
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -111,7 +107,7 @@ class UpdateDataTopicState extends State<UpdateDataTopic> {
                     _responsibleController.clear();
                     _assignmentsController.clear();
                   },
-                  child: const Text('Update'),
+                  child: const Text('Inserir'),
                 ),
               ],
             ),

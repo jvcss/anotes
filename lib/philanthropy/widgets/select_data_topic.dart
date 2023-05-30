@@ -5,8 +5,12 @@ import '../models/topic_model.dart';
 
 class SelectDataTopic extends StatelessWidget {
   final Function(TopicModel)? onChanged; // Callback function
+  // Callback function for initialization
 
-  const SelectDataTopic({Key? key, this.onChanged}) : super(key: key);
+  const SelectDataTopic({
+    Key? key,
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

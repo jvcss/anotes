@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import '../data/database.dart';
 
@@ -53,6 +55,7 @@ class TopicProvider extends ChangeNotifier {
               assignments: item['assignments'],
             ))
         .toList();
+    print(_topics);
     notifyListeners();
   }
 

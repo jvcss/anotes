@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>756477699971-u9f6uuanmd25hai2s4kh52sbb3ja0724.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.756477699971-u9f6uuanmd25hai2s4kh52sbb3ja0724</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAQkParo1bOZ7fHvTqAm1dJoca6KeVrBhs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>756477699971</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.anotes</string>
+	<key>PROJECT_ID</key>
+	<string>aplicativo-global</string>
+	<key>STORAGE_BUCKET</key>
+	<string>aplicativo-global.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:756477699971:ios:60f15e221c141fff4678b6</string>
+	<key>DATABASE_URL</key>
+	<string>https://aplicativo-global.firebaseio.com</string>
+</dict>
+</plist>

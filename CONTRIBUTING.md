@@ -1,4 +1,18 @@
+# FIREBASE 
 
+| Project Display Name    |  AreProject ID    | Project Number  | Resource Location ID |
+| ----------------------- |:-----------------:| ---------------:| ---------------------:
+|         Aplicativo      | aplicativo-global |   756477699971  |        us-central    |
+
+---
+|           Platform      |            Firebase App Id                    |
+| ----------------------- |:---------------------------------------------:|
+|                web      |   1:756477699971:web:a527898da5ebe5a94678b6   |
+|            android      | 1:756477699971:android:02db6a53b81866374678b6 |
+|              ios        |   1:756477699971:ios:60f15e221c141fff4678b6   |
+|            macos        |   1:756477699971:ios:c3a68a8df05cb5a24678b6   |
+
+---
 
 TO DO Philanthropy folder
 

@@ -1,0 +1,19 @@
+- lib
+- firebase_options.dart
+- main.dart
+- philanthropy
+    - data
+        - database.dart
+    - models
+        - topic_model.dart
+    - screens
+        - philanthropy_screen.dart
+        - topic_screen.dart
+    - widgets
+        - add_data_form.dart
+        - collapsible_card.dart
+        - dynamic_label_form_field.dart
+        - select_data_topic.dart
+        - show_data_topic.dart
+        - sidebar.dart
+        - update_data_topic.dart

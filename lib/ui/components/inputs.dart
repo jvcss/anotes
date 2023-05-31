@@ -53,6 +53,7 @@ class _InputState extends State<Input> {
     return TextFormField(
       controller: widget.controller,
       obscureText: false,
+      textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: widget.label,
         prefixIconColor: Colors.blueGrey,
@@ -157,6 +158,7 @@ class _InputState extends State<Input> {
       controller: widget.controller,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
+      textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: widget.label,
         prefixIcon: const Icon(Icons.dialpad),

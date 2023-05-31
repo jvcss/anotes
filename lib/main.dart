@@ -2,6 +2,7 @@ import 'package:anotes/philanthropy/models/topic_model.dart';
 import 'package:anotes/philanthropy/screens/philanthropy_screen.dart';
 import 'package:anotes/providers/authentication_provider.dart';
 import 'package:anotes/ui/authentication/register_screen.dart';
+import 'package:anotes/ui/components/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,46 +32,77 @@ void main() {
         ChangeNotifierProvider(create: (context) => TopicProvider()),
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
       ],
-      builder: (context, child) => const App(),
+      builder: (context, child) => /**const */ App(),
     ),
   );
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Anotes API',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-          useMaterial3: true,
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.white, // Set the desired caret color
-            selectionHandleColor:
-                Colors.lightBlue, // Set the desired selection handle color
-          ),
-          inputDecorationTheme: const InputDecorationTheme(
-            filled: true,
-            focusColor: Colors.white,
-            fillColor: Colors.transparent,
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white70),
-            ),
-            activeIndicatorBorder: BorderSide(color: Colors.white),
-            labelStyle: TextStyle(color: Colors.white),
-            hintStyle: TextStyle(color: Colors.white),
-          ),
+      debugShowCheckedModeBanner: false,
+      title: 'Anotes API',
+
+      ///appTheme
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
+        useMaterial3: true,
+      ),
+
+      ///
+      ///TESTING
+      ///
+      home: const Tester(), //RegisterScreen() //PhilanthropyScreen(),
+    );
+  }
+}
+
+class Tester extends StatelessWidget {
+  const Tester({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController numberController = TextEditingController();
+    final TextEditingController textController = TextEditingController();
+
+    return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.navigation),
         ),
-        home: RegisterScreen() //PhilanthropyScreen(),
-        );
+        body: Center(
+            child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Input(
+                      key: key,
+                      label: 'Email',
+                      controller: emailController,
+                      inputType: InputType.email,
+                    ),
+                    Input(
+                      label: 'Password',
+                      controller: passwordController,
+                      inputType: InputType.password,
+                    ),
+                    Input(
+                      label: 'Numeric',
+                      controller: numberController,
+                      inputType: InputType.numeric,
+                    ),
+                    Input(
+                      label: 'Text',
+                      controller: textController,
+                      inputType: InputType.text,
+                    ),
+                  ],
+                ))));
   }
 }

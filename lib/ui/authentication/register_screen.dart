@@ -47,10 +47,7 @@ class RegisterScreen extends StatelessWidget {
                       )),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    return (value != null && value.contains('@'))
-                        ? 'Do not use the @ char.'
-                        : null;
-                    /*if (value!.isEmpty) {
+                    if (value!.isEmpty) {
                       return 'Please enter your email';
                     }
                     if (!EmailValidator.validate(value)) {
@@ -59,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
                     if (!isAllowedEmailProvider(value)) {
                       return 'Please use a supported email provider (e.g., Google, Hotmail, Yahoo)';
                     }
-                    return null;*/
+                    return null;
                   },
                 ),
                 const SizedBox(height: 16),

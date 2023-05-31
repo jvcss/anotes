@@ -32,13 +32,13 @@ void main() {
         ChangeNotifierProvider(create: (context) => TopicProvider()),
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
       ],
-      builder: (context, child) => /**const */ App(),
+      builder: (context, child) => const App(),
     ),
   );
 }
 
 class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,6 @@ class Tester extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Input(
-                      key: key,
                       label: 'Email',
                       controller: emailController,
                       inputType: InputType.email,
@@ -96,11 +95,13 @@ class Tester extends StatelessWidget {
                       label: 'Numeric',
                       controller: numberController,
                       inputType: InputType.numeric,
+                      acceptsFloat: true,
                     ),
                     Input(
                       label: 'Text',
                       controller: textController,
                       inputType: InputType.text,
+                      multiline: true,
                     ),
                   ],
                 ))));

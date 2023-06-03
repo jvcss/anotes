@@ -2,8 +2,7 @@ import 'package:anotes/philanthropy/models/topic_model.dart';
 import 'package:anotes/philanthropy/screens/philanthropy_screen.dart';
 import 'package:anotes/providers/authentication_provider.dart';
 import 'package:anotes/ui/authentication/register_screen.dart';
-import 'package:anotes/ui/components/forms.dart';
-import 'package:anotes/ui/components/inputs.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,72 +45,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Anotes API',
-
-      ///appTheme
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
         useMaterial3: true,
       ),
 
-      ///
       ///TESTING
       ///
-      home: const Tester(), //RegisterScreen() //PhilanthropyScreen(),
+      home: const RegisterScreen(), //PhilanthropyScreen(),
     );
-  }
-}
-
-class Tester extends StatelessWidget {
-  const Tester({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    // ignore: unused_local_variable
-    final TextEditingController numberController = TextEditingController();
-    // ignore: unused_local_variable
-    final TextEditingController textController = TextEditingController();
-
-    return Scaffold(
-        body: Center(
-            child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Forms(
-                        onSubmit: (Map<String, String> values) {
-                          // Handle login logic using the submitted form values
-                          final email = values['email'];
-                          final password = values['password'];
-                          // Perform login authentication and navigation logic
-                          // ignore: avoid_print
-                          print('processed $email, $password');
-                        },
-                        children: [
-                          Input(
-                            label: 'Email',
-                            controller: emailController,
-                            inputType: InputType.email,
-                          ),
-                          Input(
-                            label: 'Password',
-                            controller: passwordController,
-                            inputType: InputType.password,
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Trigger form submission
-                              Forms.of(context)?.submitForm();
-                            },
-                            child: const Text('Submit'),
-                          ),
-                        ]),
-                  ],
-                ))));
   }
 }

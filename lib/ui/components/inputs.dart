@@ -107,7 +107,7 @@ class _InputState extends State<Input> {
     return TextFormField(
       controller: widget.controller,
       obscureText: !isPasswordVisible,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: widget.label,

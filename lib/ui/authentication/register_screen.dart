@@ -3,10 +3,23 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import '../../providers/authentication_provider.dart';
+import '../components/inputs.dart';
 
-class RegisterScreen extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  late TextEditingController emailController = TextEditingController();
+
+  late TextEditingController passwordController = TextEditingController();
+
+  bool isFormValidated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,75 +38,88 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Register',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.white),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'meu_melhor_email@gmail.com',
-                      prefixIconColor: Colors.white70,
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.email),
-                      )),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!EmailValidator.validate(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    if (!isAllowedEmailProvider(value)) {
-                      return 'Please use a supported email provider (e.g., Google, Hotmail, Yahoo)';
-                    }
-                    return null;
+                Form(
+                  onWillPop: () async {
+                    bool shouldPop = await showConfirmationDialog(
+                        context, 'Confirm', 'You really want to leave me?');
+                    return shouldPop;
                   },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                      labelText: 'Password',
-                      hintText: '******',
-                      prefixIconColor: Colors.white70,
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.lock),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
-                      suffixIconColor: Colors.blueGrey,
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.visibility),
-                      )),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your password';
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Input(
+                        label: 'E-mail',
+                        controller: emailController,
+                        inputType: InputType.email,
+                      ),
+                      Input(
+                        label: 'Password',
+                        controller: passwordController,
+                        inputType: InputType.password,
+                      ),
+                    ],
+                  ),
+                  onChanged: () async {
+                    if (!isFormValidated) {
+                      isFormValidated = true;
+                      if (_formKey.currentState?.validate() == true) {
+                        bool shouldGo = await showConfirmationDialog(
+                            context, 'Confirm', "You sure that's all? ");
+                        if (shouldGo) {
+                          _showToast(context);
+                        }
+
+                        //_formKey.currentState?.save();
+                        //_showToast(context);
+
+                        //_registerUser(context);
+                      }
+                    } else {
+                      isFormValidated = false;
                     }
-                    if (value.length < 6) {
-                      return 'Password should be at least 6 characters long';
-                    }
-                    return null;
                   },
                 ),
-                const SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () => {}, //_registerUser(context),
+                  onPressed: () async {
+                    bool shouldGo = await showConfirmationDialog(
+                        context, 'Confirm', "You sure that's all? ");
+                    if (shouldGo) {
+                      _showToast(context);
+                    }
+                  }, //_registerUser(context),
                   child: const Text('Confirm'),
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  void _showToast(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final txt = 'EMAIL: $email, PASSWORD: $password'; // Modified content
+
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(txt), // Displaying the content of txt
+        action: SnackBarAction(
+          label: 'UNDO',
+          onPressed: scaffold.hideCurrentSnackBar,
         ),
       ),
     );
@@ -110,8 +136,8 @@ class RegisterScreen extends StatelessWidget {
   }
 
   void _registerUser(BuildContext context) {
-    final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
     final authProvider =
         Provider.of<AuthenticationProvider>(context, listen: false);
 
@@ -139,5 +165,32 @@ class RegisterScreen extends StatelessWidget {
         }
       });
     }
+  }
+
+  Future showConfirmationDialog(
+      BuildContext context, String title, String content) async {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Return true to allow the action
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('Yes'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Return false to prevent the action
+              Navigator.of(context).pop(false);
+            },
+            child: const Text('No'),
+          ),
+        ],
+      ),
+    );
   }
 }
